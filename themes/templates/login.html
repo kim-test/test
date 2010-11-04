@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        <title>注册</title>
+        
+    </head>
+    <body
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#loginform").validate({
+        onkeyup: false,
+        rules: {
+            user_name: {
+                required: true
+            },
+            password: {
+                required: true
+            }
+        },
+        messages: {
+            user_name: {
+                required: "请输入用户名"
+            },
+            password: {
+                required: "请输入密码"
+            }
+        },
+        submitHandler: ajaxHandler,
+    });
+});
+</script>
+        <br/>
+        <h1 align="center">注册</h1>
+        <hr/>
+        <br/>
+        <form action="" method="post">
+            <div align="center">
+                <table>
+                    <tr>
+                        <td>用户名：</td>
+                        <td>
+                            <input type="text" name="user_name" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>密码：</td>
+                        <td>
+                            <input type="password" name="password" />
+                        </td>
+
+                    </tr>
+                    <tr><td><br/></td></tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="登录" />
+                            <a href="#">忘记密码？</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </body>
+</html>
