@@ -10,7 +10,12 @@ function start_session()
 function dump($arr)
 {
     $args = func_get_args();
-    print_r($args);
+    if(is_array($args))
+    {
+        print_r($args);
+    }else {
+        echo $args;
+    }
     exit;
 }
 function cool_engine()
@@ -19,6 +24,11 @@ function cool_engine()
 	require_once(ROOT_PATH . '/view/cool_engine.php');
 
 	return new CoolEngine();
+}
+function fmt($a)
+{
+    $a="'".$a."'";
+    return $a;
 }
 
 class my_mysql

@@ -7,42 +7,52 @@
         
     </head>
     <body
+<script src="js/XMLHttpRequest.js" charset="utf-8" type="text/javascript"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-    $("#loginform").validate({
-        onkeyup: false,
-        rules: {
-            user_name: {
-                required: true
-            },
-            password: {
-                required: true
+function checkname()
+{
+    var ne=document.getElementById("ne");
+    var name=document.getElementById("name").value;
+    if(name.length==0)
+    {
+        ne.innerHTML="用户名不能为空!";
+        exit;
+    }
+    ne.innerHTML="";
+    var post_string="name="+document.getElementById("name").value;
+    xmlHttp=ajaxFunction();
+    xmlHttp.open("post","index.php?app=member&act=checkname",true);
+    xmlHttp.onreadystatechange=function()
+    {
+        if(xmlHttp.readyState==4)
+        {
+            if(xmlHttp.status==200)
+            {
+                ne.innerHTML=xmlHttp.responseText;
             }
-        },
-        messages: {
-            user_name: {
-                required: "请输入用户名"
-            },
-            password: {
-                required: "请输入密码"
-            }
-        },
-        submitHandler: ajaxHandler,
-    });
-});
+        }
+    }
+    //ajax form post递交必须的，规定Content-Type(默认text/plain)格式
+    xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+    xmlHttp.send(post_string);
+
+        
+
+}
 </script>
         <br/>
         <h1 align="center">注册</h1>
         <hr/>
         <br/>
-        <form action="" method="post">
+        <form id="loginform" action="" method="post">
             <div align="center">
                 <table>
                     <tr>
                         <td>用户名：</td>
                         <td>
-                            <input type="text" name="user_name" />
+                            <input type="text" id="name" name="user_name" onblur="checkname()" value="" />
                         </td>
+                        <td><div id="ne"></div></td>
                     </tr>
                     <tr>
                         <td>密码：</td>

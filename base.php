@@ -20,7 +20,6 @@ class Base{
             start_session();
         }
         $this->_db=new my_mysql();
-        $this->check();
         
     }
 
@@ -100,12 +99,16 @@ class Base{
     }
     function find($params=array(),$table='')
     {
+        if(empty($table))
+        {
+            echo 'Can\'t find data!';
+        }
         extract($this->initsql($params));
         $fields == '' && $fields = '*';
         $order && $order = ' ORDER BY ' . $order;
         $limit && $limit = ' LIMIT ' . $limit;
         $conditions = ' WHERE '.$conditions;
-        $sql = "SELECT {$fields} FROM {$tables}{$conditions}{$order}{$limit}";
+        $sql = "SELECT {$fields} FROM {$table}{$conditions}{$order}{$limit}";
         return $this->_db->get($sql);
     }
     function initsql($params)
@@ -113,7 +116,7 @@ class Base{
         $arr = array(
             'include'  => array(),
             'join'=> '',
-            'conditions' => '',
+            'conditions' => '1',
             'order'      => '',
             'fields'     => '',
             'limit'      => '',
